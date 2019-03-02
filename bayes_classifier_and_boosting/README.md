@@ -46,11 +46,11 @@ it with the `base_classifier` argument.
 > ## Run some experiments
 > Call the `testClassifier` and `plotBoundary` functions for this part.
 
-Iris:
+## Iris:
 ![b_nbc_iris](b_nbc_iris.png)
 `Final mean classification accuracy  94.7 with standard deviation 2.82`
 
-## Assignment 5: Using Bayes classifiers.
+## Assignment 5: Boosting Using Bayes classifier.
 
 > Is there any improvement in classication accuracy? Why/why not?
 
@@ -85,3 +85,89 @@ a more advanced model on the basic classifier, this could be the case of the `wi
 a low bias, and if it was the case to have a high variance, we could instead apply the bootstrap aggregation method but boosting won't 
 really make a big change.
 
+## Now repeat the steps with a decision tree classifier.
+## Iris:
+
+![dt_iris](dt_iris.png)
+`Final mean classification accuracy  92.4 with standard deviation 3.71`
+
+## Assignment 6: Boosting Using Decission tree classifier.
+
+## Iris:
+
+![b_dt_iris](b_dt_iris.png)
+`Final mean classification accuracy  94.6 with standard deviation 3.67`
+
+> Is there any improvement in classication accuracy? Why/why not?
+
+## Using Bayes Classifier:
+* **Iris**: Naive Bayes classifier `Final mean classification accuracy  89 with standard deviation 4.16` & Naive Bayesian classifier with
+adaboost algorithm `Final mean classification accuracy  94.7 with standard deviation 2.82`
+* **Vowel**: Naive Bayes classifier `Final mean classification accuracy  64.7 with standard deviation 4.03` & Naive Bayesian classifier 
+with adaboost algorithm `Final mean classification accuracy  80.2 with standard deviation 3.52`
+* **Wines**: Naive Bayes classifier  `Final mean classification accuracy  97.6 with standard deviation 1.85` & Naive Bayesian classifier
+with adaboost algorithm: `Final mean classification accuracy  96.6 with standard deviation 1.98`
+
+## Using Decission Trees Classifier:
+* **Iris**: DT classifier `Final mean classification accuracy  92.4 with standard deviation 3.71`  & DT classifier with adaboost algorithm
+`Final mean classification accuracy  94.6 with standard deviation 3.67`.
+* **Vowel**: DT classifier `Final mean classification accuracy  64.1 with standard deviation 4`  & DT classifier with adaboost algorithm 
+`Final mean classification accuracy  86.7 with standard deviation 2.87`
+* **Wines**: DT classifier `Final mean classification accuracy  91.1 with standard deviation 4.22`   & DT classifier with adaboost 
+algorithm `Final mean classification accuracy  92 with standard deviation 3.78` 
+
+According to the decission tree class in `labfun` The basic decission tree classifier depth will be half of the number of features plus 
+one, meaning that it won't be the full tree, in the case of the boosted version all the weak learining classifiers will be grown one 
+level, thus the weak models will have a high bias, trees tend to overfit the data and also tend to have low bias. Although unlike the
+Bayes classifier, it doesn't assume feature independence, therefore is not sensitive to it. Given the different data sets the 
+classification accuracy improved in all of the cases although, just on the `vowels` data set  it outperformed the bayes classifier. 
+
+> Plot the decision boundary of the boosted classifier on iris and compare it with that of the basic. What differences do you notice? 
+Is the boundary of the boosted version more complex?
+
+for the Iris data set the decission boundry is indeed more complex (has more steps? edgy?) and classifies better the data.
+It is almost as good as the boosted version of the bayesian classifier method.
+
+> Can we make up for not using a more advanced model in the basic classifier (e.g. independent features) by using boosting?
+Same as before.
+
+## Assignment 7: 
+1. If you had to pick a classiffer, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? 
+Motivate from the following criteria:
+
+This merely depends on the data we are working with, so there's not an only answerÑ
+
+**Outliers**: The best classification method will be **Tree classifier** ans it's less sensitive to outliers.
+* Naive Bayesian classifier: I'ts very sensitive to outliers, it can make the boundry change.
+* Boosted Naive Bayessian classifier and Boosted tree classifier: as the boosting functionality is to assign a greater weight to 
+missclassified instances, this makes the method very sensitive to outliers, disregarding the classification method used.
+
+**Irrelevant inputs: part of the feature space is irrelevant:** The best classification method will be **Tree classifier** as as 
+the tree will only take into account those features that maximize the information gain, which is not the case of irrelevant features.
+
+Although for **Naive Bayesian classifiers**, irrelevant inputs could help meeting the independence assumption, these are features that are
+irrelevant and won't improve our classification, removing these features won't make things change, it's just noise, although addind these 
+could make the Naive Bayes classifier perform better. If most of our features are dependent adding noise can actually help us to make
+these features less dependent . Still, adding too much noise will make the variance increase and put relevant fetures behind.
+
+* **Boosted Bayesian classifier:**
+* **Tree classifier:** it's irrelevant, .
+* **Boosted tree classifier:** 
+
+**Predictive power:** 
+* Naive Bayesian classifier:
+* Boosted Naive Bayessian classifier: The classification using the BC is done using the maximized posteriori probability.
+* Tree classifier: The classification will depend on the values the attributes that minimizes the entropy.  The output 
+* Boosted tree classifier:
+
+**Mixed types of data: binary, categorical or continuous features, etc.** **Tree classifiers** perfoms well with both, classification or regressions.
+* Naive Bayesian classifier: Will work better with continous variables.
+* Boosted Naive Bayessian classifier: It won't improve the Naive Classifier.
+* Tree classifier:
+* Boosted tree classifier:
+
+**Scalability: the dimension of the data, D, is large or the number of instances, N, is large, or both.**
+* Naive Bayesian classifier:
+* Boosted Naive Bayessian classifier: 
+* Tree classifier:
+* Boosted tree classifier:
