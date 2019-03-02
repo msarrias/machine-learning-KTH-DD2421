@@ -6,19 +6,21 @@
 * `genBlobs` generates test data, it returns Gaussian distributed data points together with class labels.
 * `plotGaussian` computes the ML estimates for the data and plot the 95%-confidence interval.
 
-This is an example of a Bayesian classifier where the data of each class is multivariate Gaussian: 
+* This is an example of a Bayesian classifier where the data of each class is multivariate Gaussian: 
 ![gauss](gauss.png)
-
-## Assignment 2:
+<br>
+* Plotting boundries:
+![gauss_boundry](gauss_boundry.png)
+<br>
+* Verifying effect of outliers: (Assignment 7)
+![outlier_gauss_boundry](outlier_gauss_boundry.png)
 
 ## Assignment 3:
 > Call the `testClassifier` and `plotBoundary` functions for this part.
 ## Iris:
-
 ![nbc_iris](nbc_iris.png)
+<br>
 `Final mean classification accuracy  89 with standard deviation 4.16`
-
-
 > When can a feature independence assumption be reasonable and when not?
 
 The naive Bayes Classifier is based on the assumption that all the feature dimensions are uncorrelated. 
@@ -48,6 +50,7 @@ it with the `base_classifier` argument.
 
 ## Iris:
 ![b_nbc_iris](b_nbc_iris.png)
+<br>
 `Final mean classification accuracy  94.7 with standard deviation 2.82`
 
 ## Assignment 5: Boosting Using Bayes classifier.
@@ -81,6 +84,7 @@ Yes, boosting can help us to improve simple classifiers, mostly when the indepen
 ## Iris:
 
 ![dt_iris](dt_iris.png)
+<br>
 `Final mean classification accuracy  92.4 with standard deviation 3.71`
 
 ## Assignment 6: Boosting Using Decission tree classifier.
@@ -88,6 +92,7 @@ Yes, boosting can help us to improve simple classifiers, mostly when the indepen
 ## Iris:
 
 ![b_dt_iris](b_dt_iris.png)
+<br>
 `Final mean classification accuracy  94.6 with standard deviation 3.67`
 
 > Is there any improvement in classication accuracy? Why/why not?
@@ -108,20 +113,21 @@ According to the decission tree class in `labfun` The basic decission tree class
 
 for the Iris data set the decission boundry is indeed more complex (has more steps? edgy?) and classifies better the data. It is almost as good as the boosted version of the bayesian classifier method.
 
-> Can we make up for not using a more advanced model in the basic classifier (e.g. independent features) by using boosting? Same as before.
+> Can we make up for not using a more advanced model in the basic classifier (e.g. independent features) by using boosting? 
+Same as before.
 
 ## Assignment 7: 
 1. If you had to pick a classiffer, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
 
-This merely depends on the data we are working with, so there's not an only answerÑ
+This merely depends on the data we are working with, so there's not an only answer.
 
 **Outliers**: The best classification method will be **Tree classifier** ans it's less sensitive to outliers.
-* Naive Bayesian classifier: I'ts very sensitive to outliers, it can make the boundry change.
-* Boosted Naive Bayessian classifier and Boosted tree classifier: as the boosting functionality is to assign a greater weight to missclassified instances, this makes the method very sensitive to outliers, disregarding the classification method used.
+* **Naive Bayesian classifier:** I'ts very sensitive to outliers, it can make the boundry change.
+* **Boosted Naive Bayessian classifier** and **Boosted tree classifier:** as the boosting functionality is to assign a greater weight to missclassified instances, this makes the method very sensitive to outliers, disregarding the classification method used.
 
 **Irrelevant inputs: part of the feature space is irrelevant:** The best classification method will be **Tree classifier** as as the tree will only take into account those features that maximize the information gain, which is not the case of irrelevant features.
 
-Although for **Naive Bayesian classifiers**, irrelevant inputs could help meeting the independence assumption, these are features that are irrelevant and won't improve our classification, removing these features won't make things change, it's just noise, although addind these  could make the Naive Bayes classifier perform better. If most of our features are dependent adding noise can actually help us to make these features less dependent . Still, adding too much noise will make the variance increase and put relevant fetures behind.
+* **Naive Bayesian classifiers**: irrelevant inputs could help meeting the independence assumption, these are features that are irrelevant and won't improve our classification, removing these features won't make things change, it's just noise, although addind these  could make the Naive Bayes classifier perform better. If most of our features are dependent adding noise can actually help us to make these features less dependent . Still, adding too much noise will make the variance increase and put relevant fetures behind.
 
 * **Boosted Bayesian classifier:**
 * **Boosted tree classifier:** 
@@ -133,9 +139,9 @@ Although for **Naive Bayesian classifiers**, irrelevant inputs could help meetin
 
 **Mixed types of data: binary, categorical or continuous features, etc.** **Tree classifiers** perfoms well with both, categorical or continous data. (binary is just a special case of categorical).
 * **Naive Bayesian classifier:** Will work better with continous variables.
-* Boosted Naive Bayessian classifier: It won't improve the Naive Classifier.
-* Boosted tree classifier:
+* **Boosted Naive Bayessian classifier:** It won't improve the Naive Classifier.
+* **Boosted tree classifier:**
 
 **Scalability: the dimension of the data, D, is large or the number of instances, N, is large, or both.**
-* **Naive Bayesian classifier and **Boosted Naive Bayessian classifier:** As the classifier's predictions are made using the prior probability, the boosted and Naive Bayessian classifier works well with small samples, and high dimensions.The method is relatively simple is not computationally expensive. (as we assume independece the inverse matrix is just the product of the covariance diagonal, otherwise it will be more expensive).
-* **Tree classifier:** and **Boosted tree classifier:**, any small change on the data could deal to great changes on the trees, this clasiffication method is much more expensive, it requires more time and space and the trees can be easily overfit, leading to misclassification in instances not included in the trainning data. Boosting the classification method could help to mitigate this problem.
+* **Naive Bayesian classifier** and **Boosted Naive Bayessian classifier:** As the classifier's predictions are made using the prior probability, the boosted and Naive Bayessian classifier works well with small samples, and high dimensions.The method is relatively simple is not computationally expensive. (as we assume independece the inverse matrix is just the product of the covariance diagonal, otherwise it will be more expensive).
+* **Tree classifier** and **Boosted tree classifier**: any small change on the data could deal to great changes on the trees, this clasiffication method is much more expensive, it requires more time and space and the trees can be easily overfit, leading to misclassification in instances not included in the trainning data. Boosting the classification method could help to mitigate this problem.
