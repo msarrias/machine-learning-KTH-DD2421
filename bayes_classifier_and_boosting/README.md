@@ -114,10 +114,11 @@ According to the decission tree class in `labfun` The basic decission tree class
 for the Iris data set the decission boundry is indeed more complex (has more steps? edgy?) and classifies better the data. It is almost as good as the boosted version of the bayesian classifier method.
 
 > Can we make up for not using a more advanced model in the basic classifier (e.g. independent features) by using boosting? 
+
 Same as before.
 
 ## Assignment 7: 
-1. If you had to pick a classiffer, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
+> If you had to pick a classiffer, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
 
 This merely depends on the data we are working with, so there's not an only answer.
 
@@ -144,4 +145,4 @@ This merely depends on the data we are working with, so there's not an only answ
 
 **Scalability: the dimension of the data, D, is large or the number of instances, N, is large, or both.**
 * **Naive Bayesian classifier** and **Boosted Naive Bayessian classifier:** As the classifier's predictions are made using the prior probability, the boosted and Naive Bayessian classifier works well with small samples, and high dimensions.The method is relatively simple is not computationally expensive. (as we assume independece the inverse matrix is just the product of the covariance diagonal, otherwise it will be more expensive).
-* **Tree classifier** and **Boosted tree classifier**: any small change on the data could deal to great changes on the trees, this clasiffication method is much more expensive, it requires more time and space and the trees can be easily overfit, leading to misclassification in instances not included in the trainning data. Boosting the classification method could help to mitigate this problem.
+* **Tree classifier** and **Boosted tree classifier**: any small change on the data could lead to great changes on the trees, this clasiffication method is much more expensive, it requires more time and space and the trees can be easily overfitted, leading to misclassification in instances not included in the trainning data. Boosting the weak classifier could help to mitigate this problem.
