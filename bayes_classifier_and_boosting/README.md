@@ -8,11 +8,11 @@
 
 * This is an example of a Bayesian classifier where the data of each class is multivariate Gaussian: 
 ![gauss](gauss.png)
-<br>
-* Plotting boundries:
+
+
+* Plotting boundries and verifying effect of outliers: (Assignment 7)
 ![gauss_boundry](gauss_boundry.png)
-<br>
-* Verifying effect of outliers: (Assignment 7)
+
 ![outlier_gauss_boundry](outlier_gauss_boundry.png)
 
 ## Assignment 3:
