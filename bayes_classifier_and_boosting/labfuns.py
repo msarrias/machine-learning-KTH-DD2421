@@ -211,7 +211,7 @@ def testClassifier(classifier, dataset='iris', dim=0, split=0.7, ntrials=100):
 #
 # This is some code that you can use for plotting the decision boundary
 # boundary in the last part of the lab.
-def plotBoundary(classifier, dataset='iris', split=0.7):
+def plotBoundary(classifier, dataset='iris', split=0.7, file_='none'):
 
     X,y,pcadim = fetchDataset(dataset)
     xTr,yTr,xTe,yTe,trIdx,teIdx = trteSplitEven(X,y,split,1)
@@ -246,20 +246,88 @@ def plotBoundary(classifier, dataset='iris', split=0.7):
     fig = plt.figure()
     # plt.hold(True)
     conv = ColorConverter()
-    for (color, c) in zip(colormap, classes):
-        try:
-            CS = plt.contour(xRange,yRange,(grid==c).astype(float),15,linewidths=0.25,colors=conv.to_rgba_array(color))
-        except ValueError:
-            pass
-        trClIdx = np.where(y[trIdx] == c)[0]
-        teClIdx = np.where(y[teIdx] == c)[0]
-        color = color.reshape(1, len(color))
-        plt.scatter(xTr[trClIdx,0],xTr[trClIdx,1],marker='o',c=color,s=40,alpha=0.5, label="Class "+str(c)+" Train")
-        plt.scatter(xTe[teClIdx,0],xTe[teClIdx,1],marker='*',c=color,s=50,alpha=0.8, label="Class "+str(c)+" Test")
-    plt.legend(bbox_to_anchor=(1., 1), loc=2, borderaxespad=0.)
-    fig.subplots_adjust(right=0.7)
-    plt.show()
+    
+    if file_ =='none':
+        for (color, c) in zip(colormap, classes):
+            try:
+                CS = plt.contour(xRange,yRange,(grid==c).astype(float),15,linewidths=0.25,colors=conv.to_rgba_array(color))
+            except ValueError:
+                pass
+            trClIdx = np.where(y[trIdx] == c)[0]
+            teClIdx = np.where(y[teIdx] == c)[0]
+            color = color.reshape(1, len(color))
+            plt.scatter(xTr[trClIdx,0],xTr[trClIdx,1],marker='o',c=color,s=40,alpha=0.5, label="Class "+str(c)+" Train")
+            plt.scatter(xTe[teClIdx,0],xTe[teClIdx,1],marker='*',c=color,s=50,alpha=0.8, label="Class "+str(c)+" Test")
+        plt.legend(bbox_to_anchor=(1., 1), loc=2, borderaxespad=0.)
+        fig.subplots_adjust(right=0.7)
+        plt.show()
+    else:
+        for (color, c) in zip(colormap, classes):
+            try:
+                CS = plt.contour(xRange,yRange,(grid==c).astype(float),15,linewidths=0.25,colors=conv.to_rgba_array(color))
+            except ValueError:
+                pass
+            trClIdx = np.where(y[trIdx] == c)[0]
+            teClIdx = np.where(y[teIdx] == c)[0]
+            color = color.reshape(1, len(color))
+            plt.scatter(xTr[trClIdx,0],xTr[trClIdx,1],marker='o',c=color,s=40,alpha=0.5, label="Class "+str(c)+" Train")
+            plt.scatter(xTe[teClIdx,0],xTe[teClIdx,1],marker='*',c=color,s=50,alpha=0.8, label="Class "+str(c)+" Test")
+        plt.legend(bbox_to_anchor=(1., 1), loc=2, borderaxespad=0.)
+        fig.subplots_adjust(right=0.7)
+        plt.savefig(file_)
+        plt.show()
 
+        
+def MyClassifierBoundary(classifier, xTr, yTr, file_='none'):
+    
+    classes = np.unique(yTr)
+    trained_classifier = classifier.trainClassifier(xTr, yTr)
+
+    xRange = np.arange(np.min(xTr[:,0]),np.max(xTr[:,0]),np.abs(np.max(xTr[:,0])-np.min(xTr[:,0]))/100.0)
+    yRange = np.arange(np.min(xTr[:,1]),np.max(xTr[:,1]),np.abs(np.max(xTr[:,1])-np.min(xTr[:,1]))/100.0)
+
+    grid = np.zeros((yRange.size, xRange.size))
+
+    for (xi, xx) in enumerate(xRange):
+        for (yi, yy) in enumerate(yRange):
+            # Predict
+            grid[yi,xi] = trained_classifier.classify(np.array([[xx, yy]]))
+
+    
+    ys = [i+xx+(i*xx)**2 for i in range(len(classes))]
+    colormap = cm.rainbow(np.linspace(0, 1, len(ys)))
+
+    fig = plt.figure()
+    # plt.hold(True)
+    conv = ColorConverter()
+    
+    if file_=='none':
+        
+        for (color, c) in zip(colormap, classes):
+            try:
+                CS = plt.contour(xRange,yRange,(grid==c).astype(float),15,linewidths=0.25,colors=conv.to_rgba_array(color))
+            except ValueError:
+                pass
+            trClIdx = np.where(yTr == c)[0]
+            color = color.reshape(1,len(color))
+            plt.scatter(xTr[trClIdx,0],xTr[trClIdx,1],marker='o',c=color,s=40,alpha=0.5, label="Class "+str(c)+" Train")
+        plt.legend(bbox_to_anchor=(1., 1), loc=2, borderaxespad=0.)
+        fig.subplots_adjust(right=0.7)
+        plt.show()
+    else:
+        for (color, c) in zip(colormap, classes):
+            try:
+                CS = plt.contour(xRange,yRange,(grid==c).astype(float),15,linewidths=0.25,colors=conv.to_rgba_array(color))
+            except ValueError:
+                pass
+            trClIdx = np.where(yTr == c)[0]
+            color = color.reshape(1,len(color))
+            plt.scatter(xTr[trClIdx,0],xTr[trClIdx,1],marker='o',c=color,s=40,alpha=0.5, label="Class "+str(c)+" Train")
+        plt.legend(bbox_to_anchor=(1., 1), loc=2, borderaxespad=0.)
+        fig.subplots_adjust(right=0.7)
+        plt.savefig(file_)
+        plt.show()
+    
 
 def visualizeOlivettiVectors(xTr, Xte):
     N = xTr.shape[0]
