@@ -122,7 +122,7 @@ Same as before.
 This merely depends on the data we are working with, so there's not an only answer.
 
 **Outliers**: The best classification method will be **Tree classifier** ans it's less sensitive to outliers.
-* **Naive Bayesian classifier:** I'ts very sensitive to outliers, it can make the boundry change.
+* **Naive Bayesian classifier:** I'ts very sensitive to outliers, it can make the boundry change. Refer to image assignment 1.
 * **Boosted Naive Bayessian classifier** and **Boosted tree classifier:** as the boosting functionality is to assign a greater weight to missclassified instances, this makes the method very sensitive to outliers, disregarding the classification method used.
 
 **Irrelevant inputs: part of the feature space is irrelevant:** The best classification method will be **Tree classifier** as as the tree will only take into account those features that maximize the information gain, which is not the case of irrelevant features.
